@@ -1,0 +1,79 @@
+name: days_tracker
+description: A privacy-first, offline Flutter app that tracks how many days the user spends in each country and city.
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+
+  # State Management
+  flutter_bloc: ^9.1.1
+  equatable: ^2.0.5
+
+  # Code Generation
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.8.1
+
+  # Dependency Injection
+  get_it: ^8.3.0
+  injectable: ^2.3.2
+
+  # Navigation
+  auto_route: ^10.2.0
+
+  # Storage
+  flutter_secure_storage: ^9.0.0
+  shared_preferences: ^2.2.2
+
+  # Maps
+  mapbox_maps_flutter: ^2.3.0
+
+  # Location
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
+  permission_handler: ^12.0.1
+
+  # Background Services
+  workmanager: ^0.9.0+3
+  # flutter_background_fetch: ^1.1.0
+
+  # Home Widget
+  home_widget: ^0.8.1
+
+  # Utilities
+  uuid: ^4.2.2
+  http: ^1.1.2
+  logger: ^2.0.2+1
+  share_plus: ^12.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  lint: ^2.8.0
+
+  # Code Generation
+  build_runner: ^2.4.7
+  freezed: ^3.2.3
+  json_serializable: ^6.7.1
+  injectable_generator: ^2.4.1
+  auto_route_generator: ^10.2.5
+
+  # Testing
+  mockito: ^5.4.4
+  bloc_test: ^10.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/mapbox/
+
+  # Localization
+  generate: true

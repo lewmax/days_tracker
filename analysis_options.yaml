@@ -1,0 +1,32 @@
+include: package:lint/strict.yaml
+
+analyzer:
+  exclude:
+    # - '**.freezed.dart'
+    # - '**.g.dart'
+    # - '**.config.dart'
+    - '**/firebase_options_*.dart'
+    - 'lib/generated/**'
+  language:
+    strict-casts: true
+    strict-raw-types: true
+  errors:
+    invalid_annotation_target: ignore
+    unrelated_type_equality_checks: error
+    included_file_warning: ignore
+    missing_required_param: error
+    missing_return: error
+    record_literal_one_positional_no_trailing_comma: error
+    collection_methods_unrelated_type: warning
+    deprecated_member_use_from_same_package: ignore
+    parameter_assignments: warning
+    todo: ignore
+
+linter:
+  rules:
+    # Util classes are awesome!
+    avoid_classes_with_only_static_members: false
+    sort_pub_dependencies: false
+    sort_unnamed_constructors_first: false
+    prefer_single_quotes: true
+    prefer_const_constructors_in_immutables: true
