@@ -14,66 +14,53 @@ dependencies:
 
   # State Management
   flutter_bloc: ^9.1.1
-  equatable: ^2.0.5
-
-  # Code Generation
-  freezed_annotation: ^3.1.0
-  json_annotation: ^4.8.1
 
   # Dependency Injection
-  get_it: ^8.3.0
-  injectable: ^2.3.2
+  get_it: ^8.0.3
+  injectable: ^2.5.2
 
-  # Navigation
-  auto_route: ^10.2.0
+  # Code Generation
+  freezed_annotation: ^2.4.1
+  json_annotation: ^4.8.1
+
+  # Routing
+  auto_route: ^10.1.2
+
+  # Location
+  geolocator: ^11.0.0
+  geocoding: ^3.0.0
+
+  # Background Tasks
+  workmanager: ^0.5.2
 
   # Storage
   flutter_secure_storage: ^9.0.0
-  shared_preferences: ^2.2.2
-
-  # Maps
-  mapbox_maps_flutter: ^2.3.0
-
-  # Location
-  geolocator: ^14.0.2
-  geocoding: ^4.0.0
-  permission_handler: ^12.0.1
-
-  # Background Services
-  workmanager: ^0.9.0+3
-  # flutter_background_fetch: ^1.1.0
+  shared_preferences: ^2.2.0
 
   # Home Widget
-  home_widget: ^0.8.1
+  home_widget: ^0.5.0
+
+  # UI
+  flutter_screenutil: ^5.9.0
+  flutter_svg: ^2.0.0
+  table_calendar: ^3.0.0
 
   # Utilities
-  uuid: ^4.2.2
-  http: ^1.1.2
-  logger: ^2.0.2+1
-  share_plus: ^12.0.1
+  dartz: ^0.10.1
+  equatable: ^2.0.5
+  rxdart: ^0.27.0
+
+  # Logging
+  logger: ^2.0.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  lint: ^2.8.0
+  build_runner: ^2.4.0
+  freezed: ^2.4.0
+  json_serializable: ^6.7.0
+  injectable_generator: ^2.5.2
+  auto_route_generator: ^10.1.1
+  lint: ^2.3.0
+  bloc_test: ^9.1.0
 
-  # Code Generation
-  build_runner: ^2.4.7
-  freezed: ^3.2.3
-  json_serializable: ^6.7.1
-  injectable_generator: ^2.4.1
-  auto_route_generator: ^10.2.5
-
-  # Testing
-  mockito: ^5.4.4
-  bloc_test: ^10.0.0
-
-flutter:
-  uses-material-design: true
-
-  assets:
-    - assets/images/
-    - assets/mapbox/
-
-  # Localization
-  generate: true

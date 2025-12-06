@@ -1,24 +1,7 @@
-import 'package:days_tracker/core/di/locator.dart';
-import 'package:days_tracker/core/router/app_router.dart';
-import 'package:days_tracker/data/services/background_manager.dart';
-import 'package:days_tracker/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize dependency injection
-  await configureDependencies();
-
-  // Initialize background manager
-  try {
-    final backgroundManager = locator<BackgroundManager>();
-    await backgroundManager.initialize();
-  } catch (e) {
-    debugPrint('Failed to initialize background manager: $e');
-  }
-
+void main() {
   runApp(const MyApp());
 }
 
@@ -27,7 +10,6 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final appRouter = AppRouter();
 
     return MaterialApp.router(
       title: 'DaysTracker',
@@ -53,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
       localizationsDelegates: const [
-        AppLocalizations.delegate,
+        // AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
         GlobalWidgetsLocalizations.delegate,
         GlobalCupertinoLocalizations.delegate,
@@ -62,7 +44,7 @@ class MyApp extends StatelessWidget {
         Locale('en'),
         Locale('uk'),
       ],
-      routerConfig: appRouter.config(),
+      // routerConfig: appRouter.config(),
       debugShowCheckedModeBanner: false,
     );
   }
