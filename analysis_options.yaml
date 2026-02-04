@@ -2,9 +2,10 @@ include: package:lint/strict.yaml
 
 analyzer:
   exclude:
-    # - '**.freezed.dart'
-    # - '**.g.dart'
-    # - '**.config.dart'
+    - '**/*.freezed.dart'
+    - '**/*.g.dart'
+    - '**/*.gr.dart'
+    - '**/*.config.dart'
     - '**/firebase_options_*.dart'
     - 'lib/generated/**'
   language:
@@ -21,6 +22,11 @@ analyzer:
     deprecated_member_use_from_same_package: ignore
     parameter_assignments: warning
     todo: ignore
+    depend_on_referenced_packages: ignore
+    constant_identifier_names: ignore
+    # Phase 8: Polish - lib code used via DI; test mocks; JSON/API parsing
+    unreachable_from_main: ignore
+    avoid_dynamic_calls: ignore
 
 linter:
   rules:
@@ -30,3 +36,10 @@ linter:
     sort_unnamed_constructors_first: false
     prefer_single_quotes: true
     prefer_const_constructors_in_immutables: true
+    # Phase 8: test mocks and style in tests
+    use_setters_to_change_properties: false
+    avoid_redundant_argument_values: false
+    use_late_for_private_fields_and_variables: false
+    prefer_const_literals_to_create_immutables: false
+    directives_ordering: false
+    unnecessary_async: false

@@ -107,3 +107,6 @@ test/.test_coverage.dart
 **/fastlane/Preview.html
 **/fastlane/screenshots
 **/fastlane/test_output
+
+# Ignore everything inside .fvm
+.fvm/

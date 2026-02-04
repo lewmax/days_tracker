@@ -1,33 +1,41 @@
+/// Application-wide constants.
+///
+/// All magic numbers and configuration values should be defined here
+/// to ensure consistency and easy modification.
 class AppConstants {
-  // App info
-  static const String appName = 'DaysTracker';
+  AppConstants._();
+
+  /// App version string.
   static const String appVersion = '1.0.0';
 
-  // Storage keys
-  static const String storageKeyVisits = 'visits_v1';
-  static const String storageKeyPings = 'location_pings_v1';
+  /// Radius in kilometers to consider a location as "same city".
+  /// If a new ping is within this radius of an existing city, it's considered the same city.
+  static const double nearbyCityRadiusKm = 50.0;
 
-  // Time periods for summary
-  static const int days183 = 183;
-  static const int days365 = 365;
+  /// Maximum number of retries for failed geocoding attempts.
+  static const int maxGeocodingRetries = 3;
 
-  // Tracking
-  static const int defaultTrackingFrequencyMinutes = 60;
-  static const int minTrackingFrequencyMinutes = 15;
-  static const int maxTrackingFrequencyMinutes = 360; // 6 hours
+  /// Interval for background location fetch.
+  static const Duration backgroundFetchInterval = Duration(hours: 1);
 
-  // Location accuracy
-  static const double cityRadiusKm = 50.0;
+  /// Default number of days for statistics period.
+  static const int defaultStatisticsDays = 183;
 
-  // Privacy
-  static const String privacyNotice = '''
-DaysTracker is a privacy-first app. All your location data is stored locally on your device and encrypted using industry-standard encryption.
+  /// Maximum number of flags to show in calendar cell.
+  static const int maxFlagsInCalendarCell = 3;
 
-No data is ever sent to external servers. You can export your data, delete all data, or disable background tracking at any time.
+  /// Number of results for city autocomplete.
+  static const int cityAutocompleteLimit = 10;
 
-Background location tracking is used only to automatically log your visits. You can disable this feature in settings.
-''';
+  /// Number of recent cities to show.
+  static const int recentCitiesLimit = 20;
 
-  // Mapbox
-  static const String mapboxStyleUrl = 'mapbox://styles/mapbox/streets-v11';
+  /// Database name.
+  static const String databaseName = 'days_tracker.db';
+
+  /// Export file version for compatibility checking.
+  static const String exportVersion = '1.0.0';
+
+  /// Minimum accuracy in meters for a location ping to be considered valid.
+  static const double minLocationAccuracyMeters = 100.0;
 }

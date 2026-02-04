@@ -4,7 +4,7 @@ publish_to: 'none'
 version: 1.0.0+1
 
 environment:
-  sdk: '>=3.0.0 <4.0.0'
+  sdk: '>=3.9.0 <4.0.0'
 
 dependencies:
   flutter:
@@ -16,51 +16,68 @@ dependencies:
   flutter_bloc: ^9.1.1
 
   # Dependency Injection
-  get_it: ^8.0.3
-  injectable: ^2.5.2
+  get_it: ^9.2.0
+  injectable: ^2.7.1
 
-  # Code Generation
-  freezed_annotation: ^2.4.1
-  json_annotation: ^4.8.1
+  # Code Generation (ONLY for BLoC events/states)
+  freezed_annotation: ^3.1.0
+  json_annotation: ^4.9.0
 
-  # Routing
-  auto_route: ^10.1.2
+  auto_route: ^11.1.0
+
+  # Database
+  drift: ^2.21.0
+  sqlite3_flutter_libs: ^0.5.20
+  path_provider: ^2.1.2
+  path: ^1.9.0
 
   # Location
-  geolocator: ^11.0.0
-  geocoding: ^3.0.0
+  geolocator: ^14.0.2
+  geocoding: ^4.0.0
 
   # Background Tasks
-  workmanager: ^0.5.2
+  workmanager: ^0.9.0
+  background_fetch: ^1.2.1
 
   # Storage
-  flutter_secure_storage: ^9.0.0
-  shared_preferences: ^2.2.0
-
-  # Home Widget
-  home_widget: ^0.5.0
+  flutter_secure_storage: ^10.0.0
+  shared_preferences: ^2.5.4
 
   # UI
-  flutter_screenutil: ^5.9.0
-  flutter_svg: ^2.0.0
   table_calendar: ^3.0.0
+
+  # File Operations
+  file_picker: ^10.3.10
+  share_plus: ^12.0.1
 
   # Utilities
   dartz: ^0.10.1
-  equatable: ^2.0.5
-  rxdart: ^0.27.0
+  equatable: ^2.0.8
+  uuid: ^4.3.3
+  http: ^1.6.0
 
   # Logging
-  logger: ^2.0.0
+  logger: ^2.0.2+1
+
+  intl: ^0.20.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  build_runner: ^2.4.0
-  freezed: ^2.4.0
-  json_serializable: ^6.7.0
-  injectable_generator: ^2.5.2
-  auto_route_generator: ^10.1.1
-  lint: ^2.3.0
-  bloc_test: ^9.1.0
+  build_runner: ^2.10.5
+  freezed: ^3.2.3
+  json_serializable: ^6.8.0
+  injectable_generator: ^2.4.1
+  auto_route_generator: ^10.2.4
+  drift_dev: ^2.21.2
+  mockito: ^5.4.4
+  bloc_test: ^10.0.0
+  flutter_lints: ^6.0.0
+  lint: ^2.8.0
 
+dependency_overrides:
+  build: ^4.0.4
+
+flutter:
+  uses-material-design: true
+  generate: true
