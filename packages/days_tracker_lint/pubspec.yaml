@@ -1,5 +1,5 @@
 name: days_tracker_lint
-description: Custom lint rules for CreditKasa - bloc/cubit, widgets, architecture, and best practices.
+description: Custom lint rules for Days Tracker - bloc/cubit, widgets, architecture, and best practices.
 version: 0.1.0
 publish_to: 'none'
 

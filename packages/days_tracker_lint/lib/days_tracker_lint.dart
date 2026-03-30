@@ -1,3 +1,4 @@
+import 'package:custom_lint_builder/custom_lint_builder.dart';
 import 'package:days_tracker_lint/src/rules/avoid_cross_feature_imports.dart';
 import 'package:days_tracker_lint/src/rules/check_bloc_is_not_closed_after_async.dart';
 import 'package:days_tracker_lint/src/rules/check_widget_mounted_after_async.dart';
@@ -9,11 +10,10 @@ import 'package:days_tracker_lint/src/rules/no_flutter_import_in_domain.dart';
 import 'package:days_tracker_lint/src/rules/no_hardcoded_api_keys.dart';
 import 'package:days_tracker_lint/src/rules/prefer_get_prefix_returns_value.dart';
 import 'package:days_tracker_lint/src/rules/prefer_stream_subscription_cancellation.dart';
-import 'package:custom_lint_builder/custom_lint_builder.dart';
 
-PluginBase createPlugin() => _CreditKasaLint();
+PluginBase createPlugin() => _DaysTrackerLint();
 
-class _CreditKasaLint extends PluginBase {
+class _DaysTrackerLint extends PluginBase {
   @override
   List<LintRule> getLintRules(CustomLintConfigs configs) => [
     const AvoidCrossFeatureImports(),
