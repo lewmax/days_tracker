@@ -39,6 +39,16 @@ dev_dependencies:
   injectable_generator: ^2.4.1
   auto_route_generator: ^10.2.4
 
+  # ─── Linting
+  lint: ^2.8.0
+  bloc_lint: ^0.3.6
+  days_tracker_lint:
+    path: packages/days_tracker_lint
+
+dependency_overrides:
+  custom_lint: 
+    path: packages/custom_lint # wait for custom_lint to be updated to 0.8.2 to support analyzer 9.0.0
+
 flutter:
   uses-material-design: true
   generate: true
