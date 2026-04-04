@@ -1,0 +1,70 @@
+---
+description: Process rules for DaysTracker – tasks, branches, PRs, and agent workflow
+globs: lib/**/*.dart
+alwaysApply: false
+---
+
+# Process Rules
+
+## Task lifecycle (Linear)
+
+- Use the following main workflow in Linear:
+  - `Backlog v2` → raw ideas, not fully described yet.
+  - `Backlog v1` → filtered ideas with a rough description.
+  - `Analysis` → refining requirements, design, and documentation.
+  - `Ready for dev` → task is fully understood and has clear acceptance criteria.
+  - `Blocked` → external dependencies or blockers exist.
+  - `In Code` → task is being implemented in a dedicated branch.
+  - `Done` → code is merged to `main`, docs are updated, task meets the definition of done.
+
+- The Dev agent may only pick tasks that are in **`Ready for dev`**.
+- Moving a task to **`In Code`** should happen together with creating the corresponding feature branch.
+
+## Branching & PR policy
+
+- Each task is implemented in its own branch off `main`:
+  - format: `feat-{taskId}-{short-slug}` (e.g. `feat-LNR-123-visits-feature`).
+- **Direct commits to `main` are forbidden.** All changes must go through a PR.
+- One branch should correspond to one logical feature/task; do not mix unrelated changes.
+- PRs should be small enough to be reviewed carefully in one sitting.
+
+## Before starting work on a task
+
+- The Dev agent must:
+  - read the task description in Linear,
+  - read the relevant `docs/features/*.md`, `architecture.md`, and `domain_model.md`,
+  - review the design (Penpot / design docs) for any UI-related changes.
+- The agent must prepare:
+  - a list of scenarios and states that should be covered by this task,
+  - a list of open questions or ambiguities.
+- **Do not start editing code if there are unresolved ambiguities.**
+  - Instead of guessing, the agent must formulate explicit questions to the task author / product owner.
+  - Only after the answers are agreed and documented is it allowed to start implementation.
+
+## Working on a task
+
+- The Dev agent implements changes in a series of meaningful steps:
+  - always follows `Architecture & Code Rules` and `Documentation Rules`,
+  - updates the relevant docs whenever behaviour or models change.
+- In the initial stage of the product:
+  - it is **not required** to add automated tests during the very first iteration of a feature;
+  - once a feature stabilises, create a separate task like “Add tests for <feature>”.
+
+## Review & Flutter Architecture Guard
+
+- Before merging, every non-trivial PR must go through:
+  - a **Flutter Architecture Guard** check for alignment with `architecture.md`,
+  - a human code review (you) with optional help from the Refactor/Review agent.
+- If the Guard highlights architectural violations, they must be fixed or explicitly documented as technical debt with a clear reason.
+
+## Definition of Done (per task)
+
+A task can move to `Done` only if:
+
+- [ ] The feature branch has been merged into `main`.
+- [ ] All acceptance criteria listed in the Linear task are satisfied.
+- [ ] Relevant docs (`docs/features/*.md` and, if needed, `architecture.md` / `domain_model.md`) have been reviewed and updated.
+- [ ] For stabilised features: a task/plan for tests exists (if tests are not yet added) or tests have been updated.
+- [ ] The status in Linear is updated, and the PR link (if any) is recorded on the task.
+
+Following these process rules is part of the quality bar for this project, just like architecture and code style.

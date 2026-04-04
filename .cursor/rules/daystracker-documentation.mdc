@@ -1,0 +1,98 @@
+---
+description: Documentation structure and sync rules for DaysTracker project
+globs: lib/**/*.dart
+alwaysApply: false
+---
+
+# Documentation Rules
+
+## Purpose
+
+- Documentation in this repo is a **first-class artifact**, not an afterthought.
+- Certain markdown files in `docs/` are treated as the **single source of truth** for product, UX, and technical decisions.
+- Whenever code changes app behaviour, **relevant docs must be reviewed and updated in the same PR**.
+
+## Canonical documents
+
+Treat these as canonical, not optional:
+
+- Product & UX
+  - `docs/01_research.md` – competitive & UX research for DaysTracker.
+  - `docs/02_design_brief.md` – product/UX brief, personas, main flows.
+  - `docs/design/04_screens_and_components.md` – screen list, states, components, links to Penpot.
+
+- Technical architecture
+  - `docs/tech/architecture.md` – Clean Architecture, layering, DI, routing, state management rules.
+  - `docs/tech/domain_model.md` – domain entities, relationships, enums, invariants.
+
+- Features
+  - `docs/features/*.md` – one file per feature (e.g. `visits.md`, `statistics.md`, `background_tracking.md`), with:
+    - feature description and scope,
+    - UX states and flows,
+    - acceptance criteria,
+    - important edge cases.
+
+Additional docs (e.g. `CHANGELOG.md`, `ROADMAP.md`, `README.md`) should stay consistent with these canonical files.
+
+## Sync rules between code and docs
+
+- When you change behaviour, data models, or user-visible flows, you **must**:
+  - Identify which `docs/features/*.md` and/or tech docs are impacted.
+  - Update those documents in the same PR (or explicitly justify why no doc change is needed).
+- **Forbidden**: merging a PR that:
+  - modifies domain models, repositories, or BLoC behaviour,
+  - changes UX flows or adds/removes feature scope,
+  - **without** either:
+    - updated docs, or
+    - a clear note in the PR description: “Docs: no change needed (reason: …)”.
+- New features should not be considered “Done” in Linear until:
+  - code is merged, and
+  - corresponding `docs/features/*.md` exists and reflects the implemented behaviour.
+
+## Structure and style
+
+- All documentation is written in **English**, using clear headings, bullet lists, and short paragraphs.
+- Prefer **one place for each fact**:
+  - If something belongs in `domain_model.md`, do not duplicate full definitions elsewhere; link or reference instead.
+  - Feature-specific rules live in `docs/features/<feature>.md`, higher-level architecture lives in `docs/tech/architecture.md`.
+- Keep docs **implementation-oriented but technology-agnostic where possible**:
+  - Describe responsibilities, flows, and contracts, not every UI pixel.
+  - Avoid leaking low-level implementation details (e.g. function names) into product docs unless necessary.
+
+## Feature doc contents (docs/features/*.md)
+
+Each feature doc should at minimum contain:
+
+- **Overview** – what this feature does and why it exists.
+- **User stories / scenarios** – bullet-based flows (happy path + important edge cases).
+- **States & UX** – possible UI states (empty, loading, success, error, special cases).
+- **Domain impact** – which entities, repositories, and use cases are involved.
+- **Acceptance criteria** – clear, testable statements of “done”.
+- **Open questions / future work** – known gaps that are intentionally out of scope for the current iteration.
+
+When implementing or changing a feature, keep this section aligned with the actual code.
+
+## Responsibilities per role/agent
+
+- **Product & UX Strategist / Design agents**:
+  - Own and update `01_research.md`, `02_design_brief.md`, and design docs when product/UX decisions change.
+- **Tech Spec & Backlog Architect**:
+  - Owns `architecture.md`, `domain_model.md`, and initial `features/*.md`.
+- **Dev Feature Agent**:
+  - On each PR, checks whether any docs are impacted and proposes updates.
+- **Flutter Architecture Guard**:
+  - Flags code changes that obviously contradict current `architecture.md` or `domain_model.md` and suggests doc updates when architecture evolves.
+
+## PR checklist (documentation)
+
+Before merging a PR that goes beyond trivial refactors:
+
+- [ ] I reviewed relevant `docs/*.md` and updated them OR confirmed no change is needed.
+- [ ] For new or changed features, `docs/features/<feature>.md` accurately describes:
+      - flows, states, and edge cases,
+      - acceptance criteria that match the implemented behaviour.
+- [ ] PR description includes a short “Docs” section:
+      - `Docs: updated <list of files>` or
+      - `Docs: no change (reason: …)`.
+
+Keeping code and docs in sync is part of the definition of Done for this project.

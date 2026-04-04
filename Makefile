@@ -24,3 +24,6 @@ localization:
 start:
     $(MAKE) clean
     $(MAKE) run
+
+mcps:
+    npx -y @penpot/mcp@latest
