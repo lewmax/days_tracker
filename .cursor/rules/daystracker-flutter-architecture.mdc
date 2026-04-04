@@ -1,0 +1,92 @@
+---
+description: Flutter Clean Architecture, BLoC, and layering rules for DaysTracker (lib/ only)
+globs: lib/**/*.dart
+alwaysApply: false
+---
+
+# Architecture & code rules
+
+App code for this package lives under **`lib/`** only. The same layering rules apply to all Dart files matched by `globs`.
+
+## Layering (Clean Architecture)
+
+- Organize code as **domain → data → presentation**. Dependencies point **inward**: presentation depends on domain abstractions; data implements them.
+- **Forbidden**: `presentation` importing concrete **data** types (repository implementations, DAOs, API clients, DTO mappers tied to IO).
+- **Forbidden**: calling **DAOs / local DB / raw API clients** directly from widgets or BLoCs. All persistence and network I/O go through **repository implementations** behind **domain interfaces**.
+- **Forbidden**: `domain` or `data` importing **routing**, **widgets**, or **Flutter** except where a thin boundary is explicitly allowed (e.g. data layer may use `dart:io` / plugins only inside adapters).
+- **Domain** defines: repository **interfaces**, a small set of **Failure** types, pure **entities/models**, **enums**, and optional **pure functions** for rules (e.g. day counting) with no I/O.
+- **Data** implements repositories, owns Drift/DAO/API/DTOs, maps to domain entities, and maps low-level errors to domain **Failure**s.
+- **Presentation** contains: UI widgets, **BLoCs/Cubits**, routing glue, and presentation-only helpers.
+
+## Orchestration (no separate use-case layer)
+
+- **BLoCs/Cubits** call **repository interfaces** (and pure domain helpers where needed). There is **no** dedicated use-case class layer.
+- **Avoid** duplicating the same sequence of repository calls across multiple BLoCs or widgets. If a workflow is non-trivial, add a **single** higher-level method on the **repository interface** (implemented in data) so orchestration stays in one place.
+- BLoCs focus on **UI state**, **events**, and mapping **Failure** → user-visible error states; keep business rules that do not need I/O in **domain** (pure functions / entities).
+
+## Domain models
+
+- Domain entities are **plain Dart classes**: immutable fields, `copyWith`, **`Equatable`** for value equality.
+- **Do not** use **`freezed`** for domain entities or DTOs.
+- Domain models must not import **Flutter**, **widgets**, or **platform/UI** packages.
+
+## State management
+
+- Use **`flutter_bloc`** (BLoC or Cubit).
+- BLoCs/Cubits depend only on **domain abstractions** (repository interfaces), injected via **`get_it`** + **`injectable`**.
+- Use **events + handlers** for non-trivial flows; apply **`bloc_concurrency`** transformers where overlapping events matter (e.g. `restartable`, `droppable`) when the dependency is added.
+
+## Repositories
+
+- Declare **abstract** repository interfaces in **domain**.
+- Implement them in **data** as `*RepositoryImpl` with **`@Injectable(as: RepositoryInterface)`** (or project-equivalent `injectable` pattern).
+- Repository methods that can fail return **`Either<Failure, T>`** from **`dartz`**. BLoCs/widgets depend only on the **interface**, never the implementation.
+
+## Errors and `dartz`
+
+- Use **`dartz`**: repository (and similar domain-facing) APIs return **`Either<Failure, T>`** or **`Either<Failure, Unit>`** for operations that can fail.
+- Define a small, consistent set of **`Failure`** types (e.g. sealed hierarchy) in **domain**. Do not throw raw exceptions across the domain boundary into BLoCs; **map** exceptions to **`Failure`** inside **data** (typically in repository implementations).
+- BLoCs **`fold`** on **`Either`** (or equivalent) and emit error states with **localized** messages where appropriate.
+
+## Dates and time
+
+- Store and pass **UTC** `DateTime` in **domain** and **data**.
+- Convert to local time only at the **presentation** boundary (formatting, pickers, calendar UI).
+- Prefer explicit naming when both matter (e.g. `startUtc`); never mix UTC and local in one field without naming it clearly.
+
+## Persistence and offline behavior
+
+- Long-term state uses **local DB** (e.g. Drift/SQLite) **behind** repositories, not from BLoCs.
+- Background location, visits, and aggregates are loaded/saved only through **repositories**.
+- **DTOs** and API types stay in **data**; do not leak them into **domain** or **presentation**.
+
+## Models, unions, and serialization
+
+- Use **`freezed`** only for: BLoC **events**, BLoC **states**, and sealed unions that are **strictly** presentation/state concerns.
+- DTOs: **`json_serializable`** (or project standard); keep in **data** and map to plain domain entities.
+- Do not expose DTOs or raw HTTP types outside **data**.
+
+## Navigation
+
+- Use **`auto_route`** consistently; define routes in one place.
+- Avoid ad-hoc **`Navigator.push`** from random widgets; use the generated router / `context.router`.
+- **Domain** and **data** must not depend on routing code.
+
+## Platform, location, and privacy
+
+- **`geolocator`**, **`permission_handler`**, platform channels, and similar **IO** live in **data** (or a **`core`** adapter consumed only by **data**), not in BLoCs/widgets directly.
+- No analytics or cloud sync types in **domain** unless the product explicitly adds them; **privacy-first / local-first** is the default assumption.
+
+## Internationalization
+
+- User-visible strings go through **generated l10n** (e.g. `context.l10n` / ARB). No hardcoded user-facing English in widgets (debug strings are OK).
+
+## Dependency injection (`injectable` / `get_it`)
+
+- Register repository implementations with **`@Injectable(as: Interface)`**; register BLoCs/Cubits with **`@injectable`** per project conventions.
+- After changing **`@injectable`**, **`@freezed`**, **`@JsonSerializable`**, or **`@RoutePage`**, run the project’s **codegen** (e.g. `dart run build_runner build --delete-conflicting-outputs` or your **`Makefile`** / **`docs/COMMANDS.md`** target).
+- **Never** hand-edit generated files; fix the source annotations instead.
+
+## Day-counting semantics (DaysTracker)
+
+- **Inclusive** calendar-day semantics, **timezone**, and **Schengen / 183-day** interpretation must live in **documented domain logic** (single module or pure functions), not scattered in BLoCs. When in doubt, follow the product spec; do not invent rules in the UI layer.
