@@ -195,3 +195,18 @@ When in doubt, prefer **simple, static clarity** over flashy effects.
     - and treat the updated version as the new baseline.
 
 When an agent detects repeated conflicts between actual design work and this skill, it should recommend revising the skill rather than silently ignoring it.
+
+---
+
+## 11. Quick checklist per screen
+
+For each new or updated screen, quickly verify:
+
+- [ ] **One clear primary question** this screen answers (e.g., "Where was I this month?").
+- [ ] **Diary-first framing** — travel history and memory-log feel first; residency/Schengen hints second.
+- [ ] **Consistent use** of cards, lists, empty states with the rest of the app (reuse, don't reinvent).
+- [ ] **Four states defined** — empty, loading, normal, error (and edge cases where relevant).
+- [ ] **No fear-based language** around residency/Schengen; calm, informative tone.
+- [ ] **Key actions visible** without hunting in hidden menus or gestures.
+- [ ] **Microcopy checked** — labels are short, buttons are verbs, errors explain recovery.
+- [ ] **Accessibility basics** — contrast, tap targets (≈44x44dp), don't rely on color alone.
