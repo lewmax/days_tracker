@@ -6,10 +6,8 @@ Before starting, read the full system prompt in `.cursor/agents/dev-feature-agen
 /TASK
 Implement the currently selected Linear task end-to-end in a dedicated feature branch, following specs, design, and project rules.
 
-/ASSUMPTIONS
-- Task is in status Ready for dev (or I will specify which task to use).
-- Branch naming: feat-{taskId}-{short-slug}.
-- You must not push to main or merge PRs yourself.
+/PROCESS
+Follow **Process Rules** (workspace rule `daystracker-process-rules`) for Linear statuses, branch naming, one feature branch per task, and integration via PR only. Do not push to `main` or merge PRs yourself unless the user explicitly overrides.
 
 /STEPS
 1. Confirm which Linear task to work on and restate its goal.
@@ -27,7 +25,7 @@ Implement the currently selected Linear task end-to-end in a dedicated feature b
    - how you will keep the diff small and focused.
    Wait for my approval.
 5. Implement the plan in the feature branch:
-   - create/use branch feat-{taskId}-{short-slug},
+   - create or use the branch required by **Process Rules**,
    - modify domain/data/presentation as needed,
    - update docs according to Documentation Rules.
 6. Run formatter / analyzer.

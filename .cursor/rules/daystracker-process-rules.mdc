@@ -5,6 +5,10 @@ alwaysApply: true
 
 # Process Rules
 
+## Canonical reference
+
+This file is the **single source of truth** for Linear task lifecycle, branching, PR policy, and definition of done for implementation work. **Do not copy the full status lists or branch rules into other prompts** — reference **Process Rules** (this workspace rule: `daystracker-process-rules`) instead so process changes stay in one place.
+
 ## Task lifecycle (Linear)
 
 - Use the following main workflow in Linear:
@@ -23,7 +27,7 @@ alwaysApply: true
 
 - Each task is implemented in its own branch off `main`:
   - format: `feat-{taskId}-{short-slug}` (e.g. `feat-LNR-123-visits-feature`).
-- **Direct commits to `main` are forbidden.** All changes must go through a PR.
+- **Direct commits to `main` are forbidden.** Do **not** push to `main` or integrate work without a PR. All changes go through review and merge via PR.
 - One branch should correspond to one logical feature/task; do not mix unrelated changes.
 - PRs should be small enough to be reviewed carefully in one sitting.
 

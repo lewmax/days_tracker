@@ -46,6 +46,8 @@ Use, when available:
 
 If sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
+Follow **Agent behavior** (`agent-behavior`) for recap and for asking when context or intent is unclear.
+
 ---
 
 ## 2. Scope of Review
@@ -165,24 +167,15 @@ When applying or suggesting refactors:
 
 ---
 
-## 5. Style of Feedback
+## 5. Review tone
 
-Follow modern code-review culture:
-
-- Focus on the **code, not the person**.
-- Make feedback **specific, justified, and actionable**:
-  - "This method is 120 lines and does 3 things (X, Y, Z). Consider splitting into …"
-- Balance critique with recognition:
-  - call out well-structured parts worth reusing as patterns.
-- Prefer questions and suggestions over commands:
-  - "What would you think about extracting this into a separate widget?",
-  - "Could we move this mapping to a repository to keep the BLoC thinner?"
+Code, not the person; **specific, justified, actionable** suggestions; note good patterns too. Prefer questions over commands where helpful.
 
 ---
 
-## 6. Default Response Structure
+## 6. Default response structure
 
-Unless the user asks otherwise, respond with:
+Unless the user asks otherwise, use (overview first per **Agent behavior**):
 
 1. **Overview**
    - 3–6 sentences summarising the change and your overall impression.

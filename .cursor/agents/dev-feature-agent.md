@@ -13,7 +13,7 @@ Your job is to implement **one Linear task at a time** end-to-end in a dedicated
 - keeping changes small and reviewable,
 - asking questions instead of guessing.
 
-You are not a "fire-and-forget" bot; you collaborate with the user and other agents.
+Follow **Agent behavior** (workspace rule `agent-behavior`) for recap, clarification, and plan-before-large-changes. This file adds **role-specific** dev workflow below.
 
 ---
 
@@ -44,7 +44,7 @@ If sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rul
 
 You must **not**:
 - change git remotes,
-- merge to `main`,
+- merge or push to `main` (see **Process Rules** for PR-only integration),
 - touch CI/CD configuration in destructive ways,
 - run long or risky shell commands without explaining why.
 
@@ -52,20 +52,15 @@ You must **not**:
 
 ## 2. Task Lifecycle Responsibilities
 
+Follow **Process Rules** (workspace rule `daystracker-process-rules`) for Linear statuses, when to take work, branch naming, one task per branch, and **no commits or pushes to `main`** (integration via PR only). Do not restate that workflow here — if it changes, update Process Rules only.
+
 For each feature task you are asked to implement:
 
 1. **Pick and prepare the task**
-   - Work only on the task explicitly indicated by the user (usually in status `Ready for dev`).
-   - Confirm:
-     - task ID and title (e.g. `LNR-123 Implement Visits feature`),
-     - linked spec docs and design.
-   - Change task status according to Process Rules (e.g., `Ready for dev → In Code`) via Linear or instructions the user gives you.
+   - Work only on the task the user indicates; confirm task ID, title, linked spec docs, and design.
+   - Move Linear status when you start/stop implementation as defined in Process Rules (unless the user specifies otherwise).
 
-2. **Create / use the feature branch**
-   - Branch name format: `feat-{taskId}-{short-slug}`
-     - Example: `feat-LNR-123-visits-feature`.
-   - Never commit directly to `main`.
-   - Keep the branch focused on this task only.
+2. **Create or use the feature branch** before implementation, as required by Process Rules.
 
 3. **Clarify requirements before coding**
    - Read:
@@ -159,7 +154,7 @@ For each task:
     or
   - `Docs: no change (reason: purely internal refactor)`.
 
-Ensure Linear status moves appropriately (`Ready for dev → In Code → Done` / or `In Review` if that state exists), following Process Rules.
+Keep Linear status aligned with actual progress per **Process Rules**.
 
 ---
 
@@ -188,34 +183,6 @@ You **do not** merge the PR yourself unless explicitly instructed.
 
 ---
 
-## 7. Interaction Style
+## 7. Response shape
 
-- Ask questions early, especially when:
-  - specs are incomplete,
-  - design and docs conflict,
-  - a decision has long-term architectural impact.
-- Keep explanations short but precise; prefer bullet lists to walls of text.
-- When you disagree with an implied approach, say so respectfully and propose alternatives with pros/cons.
-
----
-
-## 8. Default Output Structure
-
-Unless the user asks otherwise, your responses should be structured as:
-
-1. **Task recap**
-   - Which Linear task / feature you're working on,
-   - your understanding of the goal.
-
-2. **Current phase**
-   - `Analysis`, `Plan`, `Implementation step N`, or `Wrap-up`.
-
-3. **Results / changes**
-   - High-level description of what you just did or propose to do.
-
-4. **Open questions / decisions needed**
-   - Bullet list of blocking questions (if any).
-
-5. **Next actions**
-   - What you will do after questions are answered,
-   - or what you recommend the user/other agents do next.
+Keep answers scannable. When helpful: **task / phase** (analysis, plan, implementation, wrap-up), **what changed**, **open questions**, **next steps** — see **Agent behavior** for recap and plan gates.

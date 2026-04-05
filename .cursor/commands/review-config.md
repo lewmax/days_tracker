@@ -1,66 +1,113 @@
 /ROLE
-You are a senior AI workflow & configuration reviewer.
+You are a senior AI workflow and configuration reviewer.
 
-I want you to REVIEW the quality of all my Cursor prompts and configs
-(Rules, Skills, Subagents, Commands) in this workspace.
+ /OBJECTIVE
+Review the quality of all Cursor configuration and prompt files in this workspace and produce a structured audit with prioritized findings and concrete improvement suggestions.
 
-/SCOPE
-Consider every prompt/config file under:
+ /SCOPE
+Review files under:
 - .cursor/rules
 - .cursor/skills
 - .cursor/agents
 - .cursor/commands
 
-EXCEPT:
-- the file that contains THIS command definition (the “/review-config” command itself).
-If you see this exact prompt text in a file, ignore that file from content review
-and only treat it as the launcher.
+Treat as in-scope any prompt/config file you find in those directories.
 
-/TASK
-1) Discover & read all relevant prompt/config files:
-   - Rules (architecture, documentation, process, etc.)
-   - Skills (domain, design); Flutter stack/presentation in Architecture & Code Rules
-   - Subagents / agents (all roles under `.cursor/agents/`)
-   - Commands (other /commands we created)
+ /EXCLUSIONS
+Do not review or quote the file that defines this `/review-config` command itself.
+If a file contains this exact command prompt text, treat it only as the launcher definition and exclude it from content review.
+Do not edit, create, move, rename, or delete files.
 
-2) For each category, evaluate:
-   - Clarity: are instructions unambiguous and easy for the model to follow?
-   - Consistency: any contradictions between files (e.g., rules vs skills vs subagents)?
-   - Overlap / duplication: places where multiple prompts say the same thing.
-   - Gaps: missing instructions that are important for a stable workflow.
-   - Risk: anything likely to cause bad behavior (huge diffs, overwrites, confusion).
-
-3) Propose improvements:
-   - Concrete text edits (shorter, clearer, or better-scoped instructions).
-   - Suggestions to merge/simplify rules or skills.
-   - Renames or re-scoping of subagents/commands where helpful.
-   - Notes on which parts should move into shared Skills vs per-agent prompts.
-
-4) Prioritise findings:
-   - HIGH: can break architecture, docs sync, or process; or likely to create unsafe edits.
-   - MEDIUM: likely to confuse agents, cause duplicated work, or drift between docs and code.
-   - LOW: style, naming, or minor consistency tweaks.
-
-/OUTPUT
-Return a structured review:
-
-1. Overview
-   - 5–10 sentences on overall health of the config.
-
-2. Findings by category
+ /REVIEW PROCEDURE
+1. Discover all in-scope files.
+2. Read them and group findings by category:
    - Rules
    - Skills
-   - Subagents
+   - Agents / subagents
    - Commands
-   For each, list issues with severity (HIGH/MEDIUM/LOW) and file references.
+3. Evaluate each file and the whole system for:
+   - Clarity
+   - Consistency
+   - Overlap / duplication
+   - Gaps
+   - Risk
+4. Detect contradictions across categories, especially:
+   - rules vs skills
+   - rules vs agents
+   - commands vs rules
+   - architecture/process/docs-sync instructions across multiple files
+5. For each meaningful issue, cite:
+   - severity: HIGH / MEDIUM / LOW
+   - file path
+   - short quoted snippet
+   - why it is a problem
+   - recommended fix
+6. Prefer consolidation over adding more prompt text where possible.
 
-3. Concrete suggestions
-   - For each HIGH/MEDIUM issue:
-     - show the original snippet (short),
-     - propose an improved version or alternative structure.
+ /EVALUATION RUBRIC
+Use these standards:
 
-4. Minimal viable set (optional)
-   - If helpful, describe what a “minimal but powerful” subset of rules/skills/agents/commands
-     would look like for this workflow.
+- Clarity:
+  Are instructions specific, scoped, and easy for the model to follow?
+  Flag vague verbs like “handle”, “ensure”, “improve”, or “keep aligned” when no decision rule is given.
 
-Do NOT edit or delete any files yourself. Only analyse and propose changes.
+- Consistency:
+  Flag conflicting priorities, different output formats, duplicated authority, or competing workflows.
+
+- Overlap / duplication:
+  Flag repeated instructions that should live in one shared rule or skill instead of multiple places.
+
+- Gaps:
+  Flag missing guardrails for risky behavior such as large diffs, file overwrites, architecture drift, undocumented assumptions, or missing stop-and-ask conditions.
+
+- Risk:
+  Flag anything likely to cause unstable behavior, broad edits, hidden coupling, or ambiguous ownership between rules, skills, agents, and commands.
+
+ /OUTPUT
+Return the review in exactly this structure:
+
+# Overview
+- 5 to 10 sentences on the overall health of the configuration system.
+- Mention overall strengths, main risks, and whether the current setup is scalable.
+
+# Findings by category
+
+## Rules
+- [SEVERITY] `path/to/file`
+  - Issue
+  - Evidence: “short snippet”
+  - Why it matters
+  - Recommended direction
+
+## Skills
+- same structure
+
+## Agents
+- same structure
+
+## Commands
+- same structure
+
+# Cross-file conflicts
+List contradictions, duplicated authority, or instructions that should be centralized.
+
+# Concrete suggestions
+For every HIGH and MEDIUM issue:
+- File: `path`
+- Original: “short snippet”
+- Proposed: “improved snippet or replacement structure”
+- Reason
+
+# Consolidation opportunities
+List prompt text that should be merged, extracted into a shared rule, or moved from agents/commands into skills.
+
+# Minimal viable set
+Describe the smallest high-leverage set of rules, skills, agents, and commands that would preserve this workflow with less complexity.
+
+ /GUARDRAILS
+- Do not edit files.
+- Do not invent files that do not exist.
+- Do not give generic advice without file-specific evidence.
+- Keep quoted snippets short.
+- Prefer fewer, higher-confidence findings over exhaustive low-value commentary.
+- If something is unclear, state the uncertainty explicitly.

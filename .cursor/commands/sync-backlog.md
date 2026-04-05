@@ -10,8 +10,7 @@ Read the current feature specs in docs/features/*.md and produce a Linear backlo
 - Stories
 - Subtasks
 
-following the workspace workflow:
-Backlog v2 → Backlog v1 → Analysis → Ready for dev → Blocked → In Code → Done.
+using status names and lifecycle order from **Process Rules** (workspace rule `daystracker-process-rules`).
 
 /STEPS
 1. List all current features from docs/features/*.md.
@@ -26,7 +25,7 @@ Backlog v2 → Backlog v1 → Analysis → Ready for dev → Blocked → In Code
    - Type (Epic / Story / Subtask)
    - Short description
    - Acceptance criteria
-   - Initial status (Backlog v1 or Analysis)
+   - Suggested initial status (values allowed by Process Rules; often Backlog v1 or Analysis)
    - Suggested labels/tags
 
 /OUTPUT

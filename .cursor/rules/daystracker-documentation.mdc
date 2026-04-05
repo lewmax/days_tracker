@@ -19,6 +19,7 @@ Treat these as canonical, not optional:
   - `docs/01_research.md` – competitive & UX research for DaysTracker.
   - `docs/02_design_brief.md` – product/UX brief, personas, main flows.
   - `docs/design/04_screens_and_components.md` – screen list, states, components, links to Penpot.
+  - `docs/templates/research_template.md`, `docs/templates/design_brief_template.md` – section structure for drafting/updating the two product docs above (not product truth themselves; change templates when the expected outline changes).
 
 - Technical architecture
   - `docs/tech/architecture.md` – Clean Architecture, layering, DI, routing, state management rules.

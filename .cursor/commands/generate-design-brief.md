@@ -12,7 +12,8 @@ Generate or update these two markdown files:
 Use:
 - DaysTracker Domain Skill
 - Design Principles for DaysTracker Skill
-- Any existing docs in docs/ if present
+- `docs/templates/research_template.md` and `docs/templates/design_brief_template.md` for section structure and quality bar
+- Any other existing docs in `docs/` if present
 
 /STEPS
 1. Restate your understanding of DaysTracker and ask 3–7 clarification questions if something is ambiguous.

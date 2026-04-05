@@ -6,6 +6,12 @@ alwaysApply: false
 
 # Architecture & code rules
 
+## Master description (Flutter stack)
+
+This workspace rule is the **single master description** of the DaysTracker **Flutter stack** for code under **`lib/`**: Clean Architecture layering, BLoC/Cubit, DI (`get_it` / `injectable`), domain and data models, repositories, navigation, presentation (UI/theming), and testing expectations. Portable or shared skills (e.g. **Flutter mobile patterns** outside this repo) should **mirror** this rule, not redefine the stack in parallel. If any other text disagrees with this file on structure or stack choices, follow **Conflict resolution (DaysTracker)** — for `lib/**`, **this rule wins** over duplicated skill or prompt content.
+
+---
+
 App code for this package lives under **`lib/`** only. Layering, orchestration, and dependency rules apply to all Dart files matched by `globs`. **Presentation** and **testing** guidance below applies to the same code; it does not relax any forbidden imports or layer boundaries. If other sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
 ## Layering (Clean Architecture)

@@ -41,6 +41,8 @@ You operate in **two modes** (the user or command will make the intent clear):
 
 If sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
+Follow **Agent behavior** (`agent-behavior`) for recap, clarification, and outline-before-full-write gates.
+
 ---
 
 ## Mode A — Tech Spec (architecture, domain, features)
@@ -87,9 +89,7 @@ Read `docs/features/*.md` and produce a backlog plan:
 - **Stories** — vertical, value-based slices (not “create repository” alone unless truly isolated).
 - **Subtasks** — optional breakdown (domain/data, BLoC & UI, docs sync).
 
-Respect **Process Rules** workflow states:
-
-`Backlog v2` → `Backlog v1` → `Analysis` → `Ready for dev` → `Blocked` → `In Code` → `Done`.
+Use the **Linear task lifecycle and status names** exactly as defined in **Process Rules** (workspace rule `daystracker-process-rules`). Do not duplicate that list here or invent alternate status names for this project.
 
 ### Workflow
 
@@ -125,21 +125,6 @@ EPIC: <name>
 
 ---
 
-## Interaction style
+## Response shape
 
-- Prefer **outlines before walls of text** in Tech Spec mode.
-- Use **tables and bullet lists** for scanability.
-- Mark **assumptions** explicitly when design docs are thin.
-- Keep **English** for all `docs/` content per Documentation Rules.
-
----
-
-## Default response structure
-
-Unless the user asks otherwise:
-
-1. **Mode** — Tech Spec or Backlog Planner (state which).
-2. **Summary** — What you understood and what you produced.
-3. **Deliverable** — File-separated markdown (Mode A) or epic/story structure (Mode B).
-4. **Open questions / risks** — Anything blocking “Ready for dev” clarity.
-5. **Next steps** — e.g. human review, `/bootstrap-project`, `/sync-backlog` again after doc edits, or handoff to Dev Feature Agent.
+State **mode** (A or B), **summary**, **deliverable** (file-separated markdown vs backlog plan), **risks/open questions**, **next steps**. Use outlines before long prose in Mode A; **English** for all `docs/` per Documentation Rules; label assumptions when design inputs are thin.
