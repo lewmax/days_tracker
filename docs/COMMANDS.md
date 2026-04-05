@@ -28,8 +28,7 @@ Run from project root. Use `fvm` for Flutter/Dart.
 | Regenerate app icons | `fvm dart run flutter_launcher_icons` |
 | Regenerate splash | `fvm dart run flutter_native_splash:create` |
 
-## Tests & Lint
-| Run tests | `fvm flutter test test/` |
+## Analyze & lint
 | Analyze | `fvm dart analyze` |
 | Custom lint | `fvm dart run custom_lint` |
 | Auto-fix issues | `fvm dart fix --apply` |
@@ -42,10 +41,9 @@ Run from project root. Use `fvm` for Flutter/Dart.
 | **fix_bundle_ids** — Set/restore iOS bundle ID | `fvm dart run scripts/fix_bundle_ids.dart uat` |
 
 | **lint_report** — Custom lint report | `fvm dart run scripts/lint_report.dart` |
-| **check_coverage** — Tests + 75% coverage check | `fvm dart run scripts/check_coverage.dart` |
 | **check_package_updates** — Outdated packages + changelogs | `fvm dart run scripts/check_package_updates.dart` |
 | **create_env_files** — Create .dev.env, .uat.env, .prod.env templates | `fvm dart run scripts/create_env_files.dart` |
-| **pre_commit** — Format, analyze, lint, tests | `fvm dart run scripts/pre_commit.dart` |
+| **pre_commit** — Format, analyze, lint | `fvm dart run scripts/pre_commit.dart` |
 | **version_bump** — Bump version (major/minor/patch) | `fvm dart run scripts/version_bump.dart patch` |
 
 ## Global Tools

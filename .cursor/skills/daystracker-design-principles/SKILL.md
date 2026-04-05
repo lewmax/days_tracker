@@ -12,7 +12,7 @@ It is:
 - a **guiding baseline** for designers, spec-writers, and dev agents,
 - **not immutable** – when product direction, branding, or UX strategy changes, this skill should be updated.
 
-When newer design docs (e.g. `docs/02_design_brief.md`, `docs/design/04_screens_and_components.md`) or explicit user instructions conflict with this skill, **prefer the newer information**.
+When this skill disagrees with user instructions, `docs/`, or project rules, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
 ---
 

@@ -1,7 +1,6 @@
 ---
 description: Documentation structure and sync rules for DaysTracker project
-globs: lib/**/*.dart
-alwaysApply: false
+alwaysApply: true
 ---
 
 # Documentation Rules
@@ -66,7 +65,7 @@ Each feature doc should at minimum contain:
 - **Overview** – what this feature does and why it exists.
 - **User stories / scenarios** – bullet-based flows (happy path + important edge cases).
 - **States & UX** – possible UI states (empty, loading, success, error, special cases).
-- **Domain impact** – which entities, repositories, and use cases are involved.
+- **Domain impact** – which entities, repositories are involved.
 - **Acceptance criteria** – clear, testable statements of “done”.
 - **Open questions / future work** – known gaps that are intentionally out of scope for the current iteration.
 

@@ -1,0 +1,17 @@
+---
+description: Single ordering for resolving conflicts between user, docs, rules, and skills (DaysTracker)
+alwaysApply: true
+---
+
+# Conflict resolution (DaysTracker)
+
+When instructions from different sources disagree, use this order (**higher wins**):
+
+1. **Explicit user instructions** in the current conversation (or the task given for this run).
+2. **Latest `docs/`** — canonical product, design, and technical markdown (e.g. `docs/01_research.md`, `docs/02_design_brief.md`, `docs/design/*`, `docs/tech/*`, `docs/features/*`).
+3. **Project Rules** — `.cursor/rules/*.mdc` that apply to this workspace (including Architecture & Code Rules, Documentation Rules, Process Rules).
+4. **Skills** (`.cursor/skills/**/SKILL.md`) and the rest of the active agent or command prompt.
+
+If a **rule** and a **skill** disagree on the same detail, the **rule wins** unless overridden by steps 1 or 2.
+
+**Do not repeat this full list** in agents or skills; reference this rule instead (e.g. “follow Conflict resolution (DaysTracker)”).

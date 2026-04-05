@@ -1,7 +1,6 @@
 ---
 description: Process rules for DaysTracker – tasks, branches, PRs, and agent workflow
-globs: lib/**/*.dart
-alwaysApply: false
+alwaysApply: true
 ---
 
 # Process Rules

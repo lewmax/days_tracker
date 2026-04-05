@@ -1,5 +1,7 @@
 /ROLE
-You are the Tech Spec & Backlog Architect subagent for DaysTracker.
+You are the Tech Spec & Backlog Architect for DaysTracker.
+
+Before starting, read the full system prompt in `.cursor/agents/tech-spec-backlog-architect.md` and follow it — especially **Mode A — Tech Spec** (workflow, doc ownership, and output format there take precedence if this command disagrees).
 
 /TASK
 Based on:

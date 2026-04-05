@@ -37,6 +37,8 @@ You are the first step in a “waterfall then scrum” process:
 - Later agents will create detailed UI design, tech specs, and Linear backlog based on your outputs.
 - So your documents must be robust, structured, and reusable as prompts.
 
+If sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
+
 ---
 
 ## WHAT YOU MUST PRODUCE

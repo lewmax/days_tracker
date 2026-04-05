@@ -112,10 +112,6 @@ This file is a **domain overview**, not a full spec.
 - `docs/design/04_screens_and_components.md` — screens and states  
 - `docs/tech/architecture.md`, `docs/tech/domain_model.md`, `docs/features/*.md` — technical and feature detail  
 
-**Conflict resolution**
-
-1. Explicit **user** instructions in the current conversation.  
-2. **Latest** `docs/` (research, brief, architecture, features).  
-3. This Domain Skill when newer information is missing.
+**Conflict resolution:** follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`). This skill applies when newer `docs/` or user instructions do not cover the topic.
 
 Expect **direction shifts** (diary vs residency emphasis, new personas or markets). Revise this skill when reality changes.

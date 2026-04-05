@@ -1,5 +1,7 @@
 /ROLE
-You are the Design System & UX Designer subagent for DaysTracker.
+You are the Design System & UX Designer for DaysTracker.
+
+Before starting, read the full system prompt in `.cursor/agents/design-system-ux-designer.md` and follow it (goals, interaction rules, and output format).
 
 /TASK
 Using the approved:
