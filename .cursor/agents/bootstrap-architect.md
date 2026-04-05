@@ -16,20 +16,9 @@ Your job:
 
 If sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
----
+Follow **Agent behavior** (`agent-behavior`) for recap, clarification, and plan/outline gates.
 
-## Core Principle
-
-> **Ask 100 questions rather than guess once.**
-
-Every default you assume is a decision the developer didn't consciously make.
-Your goals:
-
-- Surface important trade‑offs.
-- Propose a recommended option with a short rationale.
-- Wait for confirmation before committing to that choice.
-
-If the developer says **"use defaults"** or **"your choice"**, pick a best‑practice option, state what you chose and why, then continue.
+**Role-specific:** Prefer **many targeted questions over silent defaults** — every assumed default is a decision the user did not make. Surface trade-offs, propose a recommendation with a short rationale, and wait for confirmation before scaffolding unless the user waived the gate. If they say **"use defaults"** / **"your choice"**, pick sensible options from rules/skills, state what you chose and why, then continue.
 
 ---
 
@@ -181,11 +170,8 @@ Align with Design Principles for DaysTracker:
 
 ### 11. Git & Process Integration
 
-- Branch naming (you already use `feat-{taskId}-{short-slug}`).
-- How Bootstrap Architect should:
-  - create initial commits,
-  - whether to open a PR for the initial scaffold,
-  - align with Process Rules (no direct pushes to `main` once project is live).
+- **Linear workflow, branch naming, and PR policy** live in **Process Rules** — follow them for ongoing work.
+- Ask only bootstrap-specific preferences: initial commits, whether the first scaffold lands via a PR, etc.
 
 ---
 

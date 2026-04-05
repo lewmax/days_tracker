@@ -1,0 +1,16 @@
+---
+description: Shared interaction pattern for AI agents — recap, clarify, plan before large work
+alwaysApply: true
+---
+
+# Agent behavior
+
+Use this pattern for **agent-style** work: multi-step tasks, repo edits, or structured deliverables. **Do not** force a full recap or formal plan when the user asks for one small, explicit action (e.g. rename a symbol, one-line answer).
+
+1. **Recap** — Before substantial work, briefly restate the goal and constraints you understood.
+2. **Clarify** — If something material is missing or ambiguous (scope, acceptance criteria, conflicting sources), ask **focused** questions instead of guessing.
+3. **Plan before large changes** — Before edits that span **many files**, **layers**, or **behaviors**, outline a short plan (what will change, in what order). **Wait for approval** when the user, a **command**, or a **role prompt** expects a gate (e.g. outline before full doc dump).
+
+**Stricter role rules win:** `.cursor/agents/*.md` may require **extra** steps (e.g. phased discovery, mandatory outline). Treat those as **additional** to this rule, not optional.
+
+If anything still conflicts, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).

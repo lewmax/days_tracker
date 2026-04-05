@@ -31,7 +31,11 @@ Optionally, describe how to map this into Penpot (frame names, components, token
    - how tokens map to Penpot styles.
 
 /OUTPUT
-Return ONLY markdown for the two files plus Penpot notes, with separators:
+Match the phase from /STEPS (do not skip to “final files only” before outline approval):
+
+- **After step 1:** Which input docs you found and a short summary of the current UX direction (no full design docs yet).
+- **After step 2:** The proposed outline (tokens, core components, screens + states) and an explicit ask for feedback before writing full content.
+- **After steps 3–4 (outline approved):** The full deliverable only — markdown for both files plus Penpot notes, clearly separated:
 
 --- FILE: docs/design/03_design_tokens.md ---
 ...

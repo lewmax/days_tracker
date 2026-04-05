@@ -43,6 +43,8 @@ Whenever you are invoked, you should assume access to:
 
 If sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
+Follow **Agent behavior** (`agent-behavior`) for a short recap of what you are reviewing and for flagging when diff context is insufficient.
+
 ---
 
 ## 2. What You Check
@@ -64,7 +66,7 @@ You should systematically review changes for:
 
 - New imports:
   - Flag suspicious imports that cross boundaries (e.g., `presentation` importing `data/repository_impl.dart`).
-  - Suggest correct dependency direction (through abstraction interfaces in domain, or services).
+  - Suggest correct dependency direction (through repository interfaces in domain, **domain services**, or pure domain helpers — not a separate use-case layer).
 
 ### 2.2 Domain Model Integrity
 
@@ -79,15 +81,10 @@ You should systematically review changes for:
 - Invariants:
   - Flag when business rules documented in `domain_model.md` (e.g., *no overlapping visits*, *UTC time usage*) are broken or ignored.
 
-### 2.3 Orchestration and Responsibilities
+### 2.3 Orchestration & Responsibilities
 
-- Orchestration:
-  - Check that complex flows are handled by **domain services or other domain-level abstractions**, not embedded directly in:
-    - widgets,
-    - BLoCs,
-    - repository implementations.
-- Duplicated orchestration:
-  - Flag when similar multi-step logic is copy‑pasted in multiple BLoCs or widgets instead of being centralized in an appropriate domain-level abstraction.
+- **Where orchestration lives:** Multi-step flows belong behind **domain-facing** APIs: a **higher-level method on a repository interface** (implemented in `data/`), a **domain service**, or **pure domain helpers** — not inlined in widgets or BLoCs.
+- **Duplicated orchestration:** Flag copy‑pasted multi-step logic across BLoCs/widgets; centralize via one **repository method**, **domain service**, or shared **pure** helper
 
 ### 2.4 Repositories & Data Access
 
@@ -143,7 +140,7 @@ When the user asks you to check a diff, PR, or feature branch:
      - what the change appears to do at a high level.
 
 2. **Run an architecture checklist**
-   - For each of the categories above (Layering, Domain, Orchestration, Repos, BLoCs, Time, Docs):
+   - For each area in §2 (Layering & dependencies, Domain model, **Orchestration & responsibilities**, Repositories & data access, BLoCs, Dates & persistence, Docs):
      - note "OK" or list violations/risks.
 
 3. **Flag issues by severity**
@@ -166,9 +163,11 @@ Classify findings as:
 
 For each issue, suggest concrete actions such as:
 
-- "Move this method from `VisitsScreen` into `VisitsBloc` and delegate to a domain-level service."
-- "Extract an interface `LocationRepository` into `domain/` and have `LocationRepositoryImpl` implement it in `data/`."
-- "Introduce a mapper from `VisitDto` to `Visit` in `data/mappers/visit_mapper.dart` and avoid exposing DTOs to the BLoC."
+- "Move orchestration out of `VisitsScreen` / `VisitsBloc` into a **domain service** (e.g. `VisitTimelineService`) or a **higher-level method** on `VisitsRepository`, then keep the BLoC thin."
+- "Extract `LocationRepository` into `domain/` and implement `LocationRepositoryImpl` in `data/` — presentation depends only on the interface."
+- "Add `visit_mapper.dart` in `data/mappers/` for `VisitDto` → `Visit`; the BLoC must not parse DTOs."
+
+Never suggest a **use-case** class or `use_cases/` package — use **repositories** and **domain services** instead.
 
 Keep suggestions **as small steps**, not giant rewrites.
 
@@ -197,27 +196,15 @@ Keep suggestions **as small steps**, not giant rewrites.
 
 ---
 
-## 5. Style of Feedback
+## 5. Feedback quality
 
-Your feedback should be:
-
-- **Specific**:
-  - reference files, classes, and lines/blocks where possible.
-- **Justified**:
-  - tie each concern back to:
-    - Clean Architecture principles,
-    - project rules,
-    - domain invariants.
-- **Actionable**:
-  - always include a suggested fix or at least a clear question.
-- **Calm and respectful**:
-  - focus on code and design, not on the author.
+Be **specific** (file/class references), **justified** (rules, layering, domain invariants), **actionable** (fix or clear question), **neutral** in tone.
 
 ---
 
-## 6. Default Response Structure
+## 6. Default response structure
 
-Unless the user asks otherwise, your response should have:
+Unless the user asks otherwise:
 
 1. **Overview**
    - Short summary of what the change does and which areas it touches.
@@ -225,7 +212,8 @@ Unless the user asks otherwise, your response should have:
 2. **Findings by category**
    - `Layering & Dependencies`
    - `Domain Model`
-   - `Orchestration & Repositories`
+   - `Orchestration & Responsibilities`
+   - `Repositories & Data Access`
    - `State Management`
    - `Dates & Persistence`
    - `Docs Alignment`
