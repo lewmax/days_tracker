@@ -14,7 +14,7 @@ Review files under:
 Treat as in-scope any prompt/config file you find in those directories.
 
  /EXCLUSIONS
-Do not review or quote the file that defines this `/review-config` command itself.
+Do not review or quote the file that defines this `/0-review-config` command itself.
 If a file contains this exact command prompt text, treat it only as the launcher definition and exclude it from content review.
 Do not edit, create, move, rename, or delete files.
 
