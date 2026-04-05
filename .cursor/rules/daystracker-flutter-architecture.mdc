@@ -1,12 +1,12 @@
 ---
-description: Flutter Clean Architecture, BLoC, and layering rules for DaysTracker (lib/ only)
+description: Flutter Clean Architecture, BLoC, layering, presentation (UI/theming), and testing rules for DaysTracker (lib/ only)
 globs: lib/**/*.dart
 alwaysApply: false
 ---
 
 # Architecture & code rules
 
-App code for this package lives under **`lib/`** only. The same layering rules apply to all Dart files matched by `globs`.
+App code for this package lives under **`lib/`** only. Layering, orchestration, and dependency rules apply to all Dart files matched by `globs`. **Presentation** and **testing** guidance below applies to the same code; it does not relax any forbidden imports or layer boundaries. If other sources disagree, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
 
 ## Layering (Clean Architecture)
 
@@ -18,7 +18,7 @@ App code for this package lives under **`lib/`** only. The same layering rules a
 - **Data** implements repositories, owns Drift/DAO/API/DTOs, maps to domain entities, and maps low-level errors to domain **Failure**s.
 - **Presentation** contains: UI widgets, **BLoCs/Cubits**, routing glue, and presentation-only helpers.
 
-## Orchestration (no separate use-case layer)
+## Orchestration
 
 - **BLoCs/Cubits** call **repository interfaces** (and pure domain helpers where needed). There is **no** dedicated use-case class layer.
 - **Avoid** duplicating the same sequence of repository calls across multiple BLoCs or widgets. If a workflow is non-trivial, add a **single** higher-level method on the **repository interface** (implemented in data) so orchestration stays in one place.
@@ -90,3 +90,22 @@ App code for this package lives under **`lib/`** only. The same layering rules a
 ## Day-counting semantics (DaysTracker)
 
 - **Inclusive** calendar-day semantics, **timezone**, and **Schengen / 183-day** interpretation must live in **documented domain logic** (single module or pure functions), not scattered in BLoCs. When in doubt, follow the product spec; do not invent rules in the UI layer.
+
+## Presentation: UI composition
+
+- Prefer **composition over inheritance**: small widgets and helpers composed into screens instead of deep widget subclasses.
+- **One screen, one primary job**: keep `build` methods readable; extract private widgets or files when a tree gets hard to scan.
+- **Explicit UI states** for important surfaces: loading, success, empty, and error—avoid ambiguous half-loaded layouts (how you *show* state is here; how BLoCs emit failure/loading follows **State management** and **Errors and `dartz`** above).
+
+## Presentation: Theming and design system
+
+- **Single `ThemeData` / extensions**: colors, typography, spacing, and radii live in one place; screens use tokens (theme, `ThemeExtension`, or shared constants), not one-off literals except for true one-offs.
+- **Accessibility**: respect text scaling and contrast; do not rely on color alone for meaning (pair with icons or labels where thresholds matter).
+- Align new UI with **design docs** (`docs/design/*`) and Penpot when those exist.
+
+## Testing strategy
+
+- **Goal**: unit tests for pure/domain logic; **BLoC/Cubit tests** for non-trivial state transitions; **widget tests** for critical user flows.
+- **Early product stage**: skipping tests on the first iteration of a feature is acceptable per **Process Rules**; once behavior stabilizes, add tests or a follow-up task.
+- **Boundaries**: mock/fake at **repository interfaces** (or thin fakes), not inside low-level data adapters, unless testing that layer directly.
+- Keep tests **small and focused**; prefer Arrange–Act–Assert and readable names over coverage theater.
