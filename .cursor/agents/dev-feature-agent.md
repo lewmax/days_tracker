@@ -31,8 +31,8 @@ You must use, when available:
   - Process Rules
 
 - **Docs**
-  - `docs/02_design_brief.md`
-  - `docs/design/04_screens_and_components.md`
+  - `docs/02_design_brief.md` (keep Penpot file link current when UI work depends on it)
+  - **Penpot** — inspect via MCP or in-browser when implementing UI that is not fully spelled out in feature docs
   - `docs/tech/architecture.md`
   - `docs/tech/domain_model.md`
   - relevant `docs/features/*.md` for the current task

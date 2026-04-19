@@ -109,7 +109,7 @@ This file is a **domain overview**, not a full spec.
 
 - `docs/01_research.md` — competitor and UX research  
 - `docs/02_design_brief.md` — product and UX brief  
-- `docs/design/04_screens_and_components.md` — screens and states  
+- **Penpot** (linked from the brief when present) — screens, components, and visual design  
 - `docs/tech/architecture.md`, `docs/tech/domain_model.md`, `docs/features/*.md` — technical and feature detail  
 
 **Conflict resolution:** follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`). This skill applies when newer `docs/` or user instructions do not cover the topic.

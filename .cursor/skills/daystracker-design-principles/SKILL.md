@@ -1,7 +1,7 @@
 ---
 name: daystracker-design-principles
-description: Shared design principles, UX tone, and visual direction for the DaysTracker app (travel diary + light residency/Schengen awareness). Use when designing screens, writing UI copy, reviewing UX decisions, choosing color/typography/layout, or whenever visual style, interaction patterns, or tone of voice matter for DaysTracker.
-version: 0.1.0
+description: Shared design principles, UX tone, and visual direction for the DaysTracker app (travel diary + light residency & Schengen awareness). Use when designing screens, writing UI copy, reviewing UX decisions, choosing color/typography/layout at a principle level, or whenever visual style, interaction patterns, or tone of voice matter for DaysTracker.
+version: 0.2.0
 ---
 
 # Design Principles for DaysTracker
@@ -13,6 +13,19 @@ It is:
 - **not immutable** – when product direction, branding, or UX strategy changes, this skill should be updated.
 
 When this skill disagrees with user instructions, `docs/`, or project rules, follow **Conflict resolution (DaysTracker)** (workspace rule `daystracker-conflict-resolution`).
+
+## Scope: what belongs here vs elsewhere
+
+| **Keep in this skill** | **Do not duplicate here** |
+|--------------------------|----------------------------|
+| Product personality: diary-first, calm, privacy-first | Exact layouts, spacing, component variants |
+| Tone of voice and copy guidelines | Pixel sizes, chip labels, date string formats, FAB position |
+| High-level IA (e.g. one focus per screen; progressive disclosure) | Frame names, Penpot page paths, token hex values |
+| Accessibility *principles* (contrast, tap targets, color + label) | Per-screen specs and “how row X looks” rules |
+| How to frame Schengen/residency (helper, not alarm dashboard) | Add-visit step-by-step UI choreography |
+| Reusable heuristics (empty/loading/error/success patterns in words) | Anything that changes when design files change often |
+
+**Authoritative for screens and visual detail:** **`Penpot`**, plus **`docs/02_design_brief.md`** and **`docs/features/*.md`**. If a past version of this skill listed micro-rules (chips, FAB, etc.), **ignore stale detail**—follow the live design and brief.
 
 ---
 
@@ -56,7 +69,7 @@ If a design decision increases complexity or anxiety (especially around "tax/res
   - Use simple, lightweight icons (e.g. location, calendar, flags).
   - Avoid heavy illustration styles that dominate content; trips and day counts are the heroes.
 
-Concrete tokens and exact palettes should come from the design system (e.g. Penpot tokens) and can evolve over time.
+Concrete tokens and exact palettes come from the design system (**Penpot**); they can evolve without updating every line here.
 
 ---
 
@@ -78,44 +91,26 @@ Concrete tokens and exact palettes should come from the design system (e.g. Penp
 
 ## 4. Navigation and Main Surfaces
 
-Until updated by more detailed design docs, agents can assume:
-
-- **Bottom navigation**
-  - 3–4 main tabs, for example:
-    - **Timeline / Home** – recent and upcoming presence, quick entry.
-    - **Statistics** – aggregated days per country/city, key periods.
-    - **Calendar** – month view of days and locations.
-    - **Settings** – app behavior, data control, residency/Schengen preferences.
-- **Key secondary flows**
-  - **Add/Edit Visit** – modal or full-screen flow started from a clear "+" or primary CTA.
-  - **Day / Visit Details** – reachable from taps on timeline items or calendar cells.
-- Navigation should be:
-  - predictable (no hidden magic swipes for core actions),
-  - reversible (easy to go back without losing context).
+- **Primary structure** (names and exact flows): follow **`docs/02_design_brief.md`** and **Penpot** — e.g. main tabs, how Timeline relates to Calendar vs list views, Settings, etc.
+- **Navigation quality**
+  - Predictable: no hidden magic swipes for core actions.
+  - Reversible: easy to go back without losing context.
+- **Secondary flows** (add/edit visit, day vs visit detail, edit constraints): **do not** invent here; use the brief, feature docs, and Penpot as the source of truth.
 
 ---
 
 ## 5. Core Interaction Patterns
 
 - **Fast capture**
-  - Adding a visit should be possible in a few simple steps:
-    - choose country,
-    - choose city (search/autocomplete),
-    - date range picker,
-    - optional note.
+  - Logging a visit should stay **short** (country → place/city → dates → optional note, or equivalent per design).
+  - **Create** vs **edit** should differ clearly: e.g. choosing a place when adding vs read-only fields when only dates or notes change—**exact behavior** is defined in design/brief, not in this skill.
 - **Calendar and timeline**
-  - Calendar should be:
-    - simple, legible, with clear indication of which days are "filled" and where,
-    - enriched with minimal additional hints (e.g. flags, short codes) without clutter.
-  - Timeline:
-    - grouped by month or trip,
-    - emphasizes readable period ranges ("5–12 March, Berlin, Germany").
+  - Calendar: legible; make it obvious which days have data vs empty days; avoid cluttering cells.
+  - Timeline/list: human-readable ranges and grouping; prefer **newest-first** or another consistent order as specified in product docs.
+  - List/timeline **layout, chips, badges, FAB, flags**: implement to **Penpot**; do not treat old markdown micro-specs as binding.
 - **States**
-  - Every key screen should define:
-    - **Empty state** (no visits yet / no data for filter),
-    - **Loading state** (subtle spinners or skeletons),
-    - **Error state** (clear message + recovery action),
-    - **Overloaded state** (many items, scroll indicators, filters).
+  - Every key screen should account for:
+    - **Empty**, **loading**, **success**, **error** (and edge cases like filters with no results where relevant).
 
 ---
 
@@ -159,7 +154,7 @@ Agents generating strings should default to this tone unless explicitly told oth
   - Adequate text sizes and color contrast.
   - Avoid relying solely on color to convey important meaning (e.g. use icons/labels for thresholds).
 - **Touch targets**
-  - Buttons and tap areas suitable for mobile use (>=44x44dp).
+  - Buttons and tap areas suitable for mobile use (e.g. ~44×44dp minimum where applicable).
 - **Motion and animation**
   - Use gentle, purposeful transitions (e.g. for switching tabs, showing modals).
   - Avoid jarring or purely decorative animations, especially around "warning" moments.
@@ -188,25 +183,20 @@ When in doubt, prefer **simple, static clarity** over flashy effects.
 
 ## 10. Evolution and Overrides
 
-- This skill captures the **current design intent** but is explicitly **open to change**:
-  - UX research (`01_research.md`), design brief (`02_design_brief.md`), and detailed screen docs may refine or override these principles.
-  - The user (product owner) can shift emphasis (e.g. from "diary-first" to "residency-first"), and agents should then:
-    - update this skill,
-    - and treat the updated version as the new baseline.
+- UX research (`01_research.md`), design brief (`02_design_brief.md`), Penpot, and feature specs may refine or override these principles.
+- The user (product owner) can shift emphasis (e.g. diary-first vs residency-first); agents should then **update this skill** to match.
 
-When an agent detects repeated conflicts between actual design work and this skill, it should recommend revising the skill rather than silently ignoring it.
+When implementation repeatedly diverges from this skill because the **design file** is ahead, **update the skill’s principles**—do not resurrect obsolete micro-rules.
 
 ---
 
 ## 11. Quick checklist per screen
 
-For each new or updated screen, quickly verify:
-
-- [ ] **One clear primary question** this screen answers (e.g., "Where was I this month?").
-- [ ] **Diary-first framing** — travel history and memory-log feel first; residency/Schengen hints second.
-- [ ] **Consistent use** of cards, lists, empty states with the rest of the app (reuse, don't reinvent).
-- [ ] **Four states defined** — empty, loading, normal, error (and edge cases where relevant).
+- [ ] **One clear primary question** this screen answers.
+- [ ] **Diary-first framing** — travel history first; residency/Schengen hints second.
+- [ ] **Consistent** cards, lists, and empty states with the rest of the app.
+- [ ] **States** — empty, loading, normal, error (and edge cases where relevant).
 - [ ] **No fear-based language** around residency/Schengen; calm, informative tone.
 - [ ] **Key actions visible** without hunting in hidden menus or gestures.
-- [ ] **Microcopy checked** — labels are short, buttons are verbs, errors explain recovery.
-- [ ] **Accessibility basics** — contrast, tap targets (≈44x44dp), don't rely on color alone.
+- [ ] **Microcopy** — short labels, verb-led buttons, errors that suggest recovery.
+- [ ] **Accessibility basics** — contrast, tap targets, don’t rely on color alone.

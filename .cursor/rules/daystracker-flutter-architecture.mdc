@@ -107,7 +107,7 @@ App code for this package lives under **`lib/`** only. Layering, orchestration, 
 
 - **Single `ThemeData` / extensions**: colors, typography, spacing, and radii live in one place; screens use tokens (theme, `ThemeExtension`, or shared constants), not one-off literals except for true one-offs.
 - **Accessibility**: respect text scaling and contrast; do not rely on color alone for meaning (pair with icons or labels where thresholds matter).
-- Align new UI with **design docs** (`docs/design/*`) and Penpot when those exist.
+- Align new UI with **Penpot** (and `docs/features/*.md` / brief for behaviour). **`docs/design/assets/`** is not for Penpot screen exports — only for agreed **non-UI** assets (e.g. map tiles), not as a parallel design spec.
 
 ## Testing strategy
 

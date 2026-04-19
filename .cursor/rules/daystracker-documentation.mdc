@@ -8,7 +8,7 @@ alwaysApply: true
 ## Purpose
 
 - Documentation in this repo is a **first-class artifact**, not an afterthought.
-- Certain markdown files in `docs/` are treated as the **single source of truth** for product, UX, and technical decisions.
+- Certain markdown files in `docs/` are treated as the **single source of truth** for product, UX, and technical decisions; **Penpot** is the source of truth for visual UI (linked from the design brief).
 - Whenever code changes app behaviour, **relevant docs must be reviewed and updated in the same PR**.
 
 ## Canonical documents
@@ -17,9 +17,11 @@ Treat these as canonical, not optional:
 
 - Product & UX
   - `docs/01_research.md` – competitive & UX research for DaysTracker.
-  - `docs/02_design_brief.md` – product/UX brief, personas, main flows.
-  - `docs/design/04_screens_and_components.md` – screen list, states, components, links to Penpot.
+  - `docs/02_design_brief.md` – product/UX brief, personas, main flows; include a **Penpot file link** when available so screens, components, and tokens are defined in the design tool, not duplicated in markdown.
   - `docs/templates/research_template.md`, `docs/templates/design_brief_template.md` – section structure for drafting/updating the two product docs above (not product truth themselves; change templates when the expected outline changes).
+
+- Visual design (not a markdown file)
+  - **Penpot** is the source of truth for UI structure, components, and visual tokens. **`docs/design/assets/`** is for **non-Penpot** files only when explicitly agreed (e.g. map tiles, diagrams). **Do not** store Penpot **screenshots or export PNGs** there — they go stale and are not the design spec.
 
 - Technical architecture
   - `docs/tech/architecture.md` – Clean Architecture, layering, DI, routing, state management rules.
@@ -75,7 +77,7 @@ When implementing or changing a feature, keep this section aligned with the actu
 ## Responsibilities per role/agent
 
 - **Product & UX Strategist / Design agents**:
-  - Own and update `01_research.md`, `02_design_brief.md`, and design docs when product/UX decisions change.
+  - Own and update `01_research.md`, `02_design_brief.md`, and **Penpot** when product/UX or visual design decisions change.
 - **Tech Spec & Backlog Architect**:
   - Owns `architecture.md`, `domain_model.md`, and initial `features/*.md`.
 - **Dev Feature Agent**:

@@ -140,6 +140,9 @@ What this bucket means for DaysTracker:
   - Photo metadata import is one of the highest-leverage onboarding moves because it turns an empty app into a useful one quickly.
 - **Simple numeric summaries**
   - Schengen and country-day counts should be shown as plain-language answers before any supporting detail.
+- **Adaptive answer surfaces**
+  - `Statistics` should change the same content area in place, not behave like a dashboard or mini app-within-an-app.
+  - Chips should appear only when the current confirmed dataset makes them meaningful.
 - **Trust-building privacy language**
   - Private-journal products show that tone matters.
   - The app should explain permissions and data handling in normal language, not policy language.
@@ -152,6 +155,9 @@ What this bucket means for DaysTracker:
 
 - **Fear dashboards**
   - Heavy warning colors, legal phrasing, and "you are violating" language create anxiety and change the character of the product.
+- **Disabled or empty chips**
+  - A visible but unusable filter teaches frustration, not discoverability.
+  - If a period or category is not meaningful yet, it should be hidden rather than disabled.
 - **Social travel framing**
   - Feeds, followers, public trip books, and story-centric layouts do not support the core job.
 - **Power-user-first settings**
@@ -186,6 +192,9 @@ What this bucket means for DaysTracker:
 - **Residency awareness should not turn into explicit compliance language in MVP**
   - The product becomes heavier and more legally loaded as soon as it presents itself as a residency tool.
   - In MVP, country/city day counts and Schengen are enough.
+- **`Statistics` should not become a dashboard**
+  - The strongest version of the screen is a fast answer surface with one active category and one active period, not a wall of simultaneous widgets.
+  - Hiding low-signal chips is better than showing empty or disabled controls for completeness.
 - **Technical service setup should not surface in the core UX**
   - If advanced location or geocoding configuration is required, it should be secondary and generic in wording.
   - Provider-specific implementation details belong in technical documentation, not in the product brief.
@@ -195,7 +204,8 @@ What this bucket means for DaysTracker:
 
 ### Open questions
 
-- What period should be the default landing view in `Statistics`: `365 days`, `183 days`, or the last-used filter?
+- If multiple rolling 7-day windows have the same highest number of unique cities, should **Top week** prefer the most recent one or the earliest one?
+- How should `Statistics` explain hidden category chips when the user has too little confirmed history for a meaningful comparison?
 - How much inline editing should photo-import suggestions allow before the review step becomes too heavy?
 - How should the app show pending or unresolved background pings when geocoding is unavailable offline?
 - How much platform parity should users expect from `Import from Photos` if source access differs between devices?
@@ -208,12 +218,17 @@ What this bucket means for DaysTracker:
   - A user should feel "this app already knows enough to help me" within the first session.
 - **Turn counts into fast answers, not reports**
   - The best `Statistics` experience is closer to "How many days in Spain this year?" than to a compliance spreadsheet.
+- **Make `Statistics` adaptive instead of comprehensive**
+  - Show category chips only when there is enough confirmed data to compare meaningfully.
+  - Let one active chip swap the content in place instead of building a tab-heavy dashboard.
 - **Give the map a clear job**
   - It should help users see coverage, tap countries and cities for totals, and unlock `My Journey` only when the history is rich enough to justify it.
 - **Treat Schengen as calm math**
   - Show `used`, `remaining`, `window`, and `earliest return date if over limit`, but keep the language supportive and non-legalistic.
 - **Use confidence labels to reduce automation anxiety**
   - "Confirmed" versus "Possible" is a strong, understandable model for both photo import and low-confidence tracking events.
+- **Keep official answers tied to confirmed data**
+  - Review flows can tolerate ambiguity, but headline statistics should not quietly mix confirmed and possible stays.
 - **Design empty states with light emotional value**
   - The app does not need to become a diary, but it should still feel human and motivating when history is sparse.
 - **Make data control a retention feature**

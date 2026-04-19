@@ -132,8 +132,7 @@ For DaysTracker specifically:
 
 ### 7. Navigation & Routing
 
-- Router choice:
-  - `auto_route`, `go_router`, or other.
+- **Router:** **`auto_route`** only — required by **Architecture & Code Rules** for this repo.
 - Structure:
   - bottom navigation tabs,
   - nested navigators (e.g. per tab),

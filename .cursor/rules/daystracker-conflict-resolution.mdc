@@ -8,7 +8,7 @@ alwaysApply: true
 When instructions from different sources disagree, use this order (**higher wins**):
 
 1. **Explicit user instructions** in the current conversation (or the task given for this run).
-2. **Latest `docs/`** — canonical product, design, and technical markdown (e.g. `docs/01_research.md`, `docs/02_design_brief.md`, `docs/design/*`, `docs/tech/*`, `docs/features/*`).
+2. **Latest `docs/`** plus **Penpot** (linked from the design brief when used) — canonical product and technical markdown (e.g. `docs/01_research.md`, `docs/02_design_brief.md`, `docs/tech/*`, `docs/features/*`) and the live design file in Penpot for UI truth.
 3. **Project Rules** — `.cursor/rules/*.mdc` that apply to this workspace (including Architecture & Code Rules, Documentation Rules, Process Rules).
 4. **Skills** (`.cursor/skills/**/SKILL.md`) and the rest of the active agent or command prompt.
 

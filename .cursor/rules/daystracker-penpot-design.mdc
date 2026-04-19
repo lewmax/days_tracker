@@ -1,0 +1,36 @@
+---
+description: Penpot (MCP) — layout, tokens, contrast, sizing, and reuse for quality DaysTracker UI generation
+alwaysApply: true
+---
+
+# Penpot design generation (MCP and handoff)
+
+**Scope:** Whenever you **create or edit UI in Penpot** (including via **Penpot MCP**), or translate product copy into designed frames. For product personality and tone, follow **`.cursor/skills/daystracker-design-principles/SKILL.md`**. If anything conflicts, use **Conflict resolution (DaysTracker)** (`daystracker-conflict-resolution`).
+
+## Layout (no accidental overlap)
+
+- Prefer **flex layouts** (auto-layout): every major **screen, card, list row, and toolbar** is a flex **frame** with explicit **direction**, **gap**, and **padding**. Avoid stacking siblings with manual Y offsets when flex can order them.
+- **Clip** or **min-height** thoughtfully: scrolling regions vs fixed chrome (e.g. app bars) must be explicit so content does not draw on top of siblings.
+- **Duplicate a known-good frame** (same file or library) as the starting point for new screens; do **not** assemble full screens from scratch on an empty canvas unless the user asks for exploratory wireframes only.
+
+## Color and typography (no white-on-washout)
+
+- **Do not** set arbitrary **hex** on body, labels, or captions. Use **existing text styles** and **color / fill tokens** from the design file (or extend the library first, then use the new styles).
+- **Contrast:** text on **light surfaces** uses **dark-on-light** tokens; **light-on-dark** only on **dark or strong accent** surfaces. If a background is light or muted, **assume dark text** until a defined “on-accent” token applies.
+- **Headings vs body:** preserve **clear hierarchy** (size/weight); avoid decorative type that hurts legibility.
+
+## Shapes, sizing, and components
+
+- **Reuse components** (buttons, chips, rows, app bars) and **variants** instead of redrawing similar controls with new corner radii or heights.
+- **Consistent radii and heights** within a screen: chips, buttons, and list rows should match the **library**, not one-off values.
+- **Mobile tap targets:** interactive controls should meet **~44×44** (dp-equivalent in Penpot) minimum where the design system does not already define otherwise.
+- **Phone frames:** keep a **single canonical width** for phone artboards; inner content **fills** or **pads** consistently; do not let text blocks exceed readable line length without intentional wrapping.
+
+## Process (quality gate before “done”)
+
+- After substantive edits, **self-check**: any **overlapping** siblings at the target width, any **low-contrast** label, any **orphan** style (fill/text not from library). Fix before handing off.
+- Prefer **incremental** MCP changes (page or section scoped) over monolithic “redesign everything” calls that are harder to verify.
+
+## Source of truth
+
+- **Penpot** remains authoritative for pixels and naming; **do not** duplicate full screen specs in markdown. A **Penpot file link** in `docs/02_design_brief.md` is enough for pointers when the user wants git-visible context.

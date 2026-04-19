@@ -7,8 +7,8 @@ Before starting, read the full system prompt in `.cursor/agents/tech-spec-backlo
 Based on:
 - docs/01_research.md
 - docs/02_design_brief.md
-- docs/design/03_design_tokens.md
-- docs/design/04_screens_and_components.md
+- **the actual DaysTracker design in Penpot** (inspect via **Penpot MCP** — this is the authoritative UI/IA source when present)
+
 generate or update:
 
 1) docs/tech/architecture.md
@@ -16,17 +16,18 @@ generate or update:
 3) docs/features/*.md  (one file per major feature, e.g. visits.md, statistics.md, background_tracking.md, export_import.md)
 
 /STEPS
-1. Summarise the existing product & design at a high level.
-2. Propose an outline for:
+1. **Penpot MCP:** Read server instructions, call `high_level_overview`, then inspect the Penpot file (structure, pages, main frames/components) so the tech spec matches **what is designed**, not only the brief text.
+2. Summarise the existing product & design at a high level (brief + Penpot).
+3. Propose an outline for:
    - architecture.md
    - domain_model.md
    - initial feature files
-   and wait for my confirmation.
-3. After approval, generate full markdown content:
+   and wait for user confirmation unless they asked to skip the review step.
+4. After approval, generate full markdown content:
    - architecture.md: layers, dependencies, navigation, state management, background work, error handling.
    - domain_model.md: entities, relationships, invariants, enums.
    - features/*.md: overview, user stories, UX states, domain impact, acceptance criteria, open questions.
-4. Keep names and terminology consistent with design docs and skills.
+5. Keep names and terminology consistent with the brief, Penpot naming where helpful, and skills.
 
 /OUTPUT
 Return all files as markdown with clear separators:
@@ -38,3 +39,5 @@ Return all files as markdown with clear separators:
 --- FILE: docs/features/visits.md ---
 ...
 (etc.)
+
+If Penpot is unreachable, list what you could not verify in Penpot and ask the user for a file link, export, or screenshots before claiming the spec matches the real design.
