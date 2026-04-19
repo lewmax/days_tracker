@@ -9,7 +9,13 @@ Use this pattern for **agent-style** work: multi-step tasks, repo edits, or stru
 
 1. **Recap** — Before substantial work, briefly restate the goal and constraints you understood.
 2. **Clarify** — If something material is missing or ambiguous (scope, acceptance criteria, conflicting sources), ask **focused** questions instead of guessing.
-3. **Plan before large changes** — Before edits that span **many files**, **layers**, or **behaviors**, outline a short plan (what will change, in what order). **Wait for approval** when the user, a **command**, or a **role prompt** expects a gate (e.g. outline before full doc dump).
+3. **Plan before large changes** — A change counts as **large** when **any** of the following is true:
+   - it touches **more than one layer** in `lib/` (e.g. domain + data, data + presentation, or all three);
+   - it adds, renames, or removes a **public domain entity, repository interface, or BLoC**;
+   - it changes a **user-visible flow**, navigation graph, or persisted schema;
+   - it spans **roughly 5+ files** or mixes refactor with new behaviour.
+
+   For any such change, outline a short plan (what will change, in what order, which docs are impacted) **before editing**. **Wait for approval** when the user, a **command**, or a **role prompt** expects a gate (e.g. outline before full doc dump). Single-layer, single-feature edits (e.g. tweaking one widget, fixing one repository method) do **not** require a formal plan.
 
 **Stricter role rules win:** `.cursor/agents/*.md` may require **extra** steps (e.g. phased discovery, mandatory outline). Treat those as **additional** to this rule, not optional.
 
