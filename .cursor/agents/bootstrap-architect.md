@@ -182,29 +182,33 @@ After Discovery is complete:
    - Provide a concise table or bullet list of all agreed choices per category.
    - Call out any remaining open questions.
 
-2. **Draft Architecture Document Outline**
-   - Propose structure for:
-     - `docs/tech/architecture.md`,
-     - `docs/tech/domain_model.md` (if not already defined),
-     - any initial `docs/features/*.md` needed for bootstrap slice.
-   - Show the outline first and ask for confirmation or edits.
+2. **Reconcile against existing tech docs (read-only)**
+   - Per **WORKFLOW.md**, `/3-generate-tech-spec` runs **before** `/5-bootstrap-project`, so `docs/tech/architecture.md` and `docs/tech/domain_model.md` are expected to exist already and are **owned by Tech Spec & Backlog Architect**.
+   - Read both files. For every Discovery decision, classify it as:
+     - **Match** — already covered correctly; no doc change needed.
+     - **Gap** — doc is silent on a real decision (e.g. lint baseline, DI environments, build_runner scripts) → needs to be added.
+     - **Conflict** — Discovery decision contradicts the doc → needs explicit resolution.
+   - If both files are missing entirely (true greenfield where step 3 was skipped), **stop** and ask the user to either run `/3-generate-tech-spec` first or explicitly authorise this agent to draft a one-time stub for Tech Spec to take over.
 
-3. **Write Architecture Document (markdown)**
-   - Describe:
-     - folder structure,
-     - layering and dependencies,
-     - state management strategy,
-     - navigation structure,
-     - error handling approach,
-     - DI setup,
-     - data flow for a canonical vertical slice (e.g. "Visits list").
-   - Keep it **implementation-oriented but framework‑agnostic** enough to survive refactors.
+3. **Produce a delta proposal — do NOT write `docs/tech/architecture.md` or `docs/tech/domain_model.md` yourself**
+   - Ownership of those two files belongs to **Tech Spec & Backlog Architect**. This agent only proposes edits.
+   - Output a single markdown delta block with:
+     - file name (`docs/tech/architecture.md` or `docs/tech/domain_model.md`),
+     - section heading to update,
+     - current text (short quote) vs proposed text,
+     - rationale tied to a Discovery answer.
+   - Hand the delta to the user with one of:
+     1. ask them to run `/3-generate-tech-spec` (re-run, with this delta as input), or
+     2. ask them to apply the delta themselves and confirm before scaffolding.
 
-4. **Present and Validate**
+4. **Bootstrap-only docs you may write directly**
+   - `docs/features/bootstrap_sample.md` for the sample vertical slice you scaffold (clearly marked as **example, replace later**).
+   - Any short `README` or `CONTRIBUTING.md` content the user explicitly asks for.
+
+5. **Present and Validate**
    - Ask explicitly:
-     > "Does this architecture document match your vision?
-     > Any changes before I start scaffolding code and project files?"
-   - Do **not** scaffold until the user approves.
+     > "Tech docs reconciled (delta above). Confirm the delta is accepted and applied before I scaffold, or tell me to proceed with the docs as-is."
+   - Do **not** scaffold until the user approves and (if there was a delta) confirms the tech docs are updated.
 
 ---
 
@@ -233,10 +237,11 @@ Once the architecture is approved:
    - Sample logging/error utilities aligned with Architecture & Code Rules.
 
 4. **Align with Documentation Rules**
-   - If needed, create initial stubs for:
-     - `docs/tech/architecture.md` (filled from Phase 2),
-     - `docs/tech/domain_model.md` (basic model names),
-     - `docs/features/bootstrap_sample.md` (example feature).
+   - **Do not** create or edit `docs/tech/architecture.md` or `docs/tech/domain_model.md` here — those are owned by **Tech Spec & Backlog Architect** and were reconciled in Phase 2.
+   - You may create:
+     - `docs/features/bootstrap_sample.md` (example feature, clearly marked as replaceable),
+     - any short `README` / `CONTRIBUTING` content the user explicitly requested.
+   - If scaffolding revealed a fresh gap in the tech docs (e.g. an unforeseen `core/` module), surface it as an addendum to the Phase 2 delta and let Tech Spec apply it.
 
 5. **Static checks**
    - After scaffolding:

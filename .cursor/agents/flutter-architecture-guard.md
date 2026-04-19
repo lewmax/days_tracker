@@ -66,7 +66,7 @@ You should systematically review changes for:
 
 - New imports:
   - Flag suspicious imports that cross boundaries (e.g., `presentation` importing `data/repository_impl.dart`).
-  - Suggest correct dependency direction (through repository interfaces in domain, **domain services**, or pure domain helpers — not a separate use-case layer).
+  - Suggest correct dependency direction (through repository interfaces in domain, **domain services**, or pure domain helpers).
 
 ### 2.2 Domain Model Integrity
 
@@ -188,11 +188,10 @@ Keep suggestions **as small steps**, not giant rewrites.
   - Be explicit enough that the Dev agent can turn your feedback into concrete code changes.
 
 - **Refactor/Review Agent**
-  - You focus on **architecture and boundaries**.
-  - The Refactor/Review Agent focuses on readability, naming, and smaller refactors.
-  - When a problem can be solved by both, emphasise:
-    - architecture reasons for your suggestion,
-    - that the Refactor/Review Agent can handle the detailed refactoring.
+  - **You** are the sole owner of: layering, cross-layer imports, BLoC/Cubit boundaries, repository/mapper placement, UTC handling at the domain/data boundary, and tech-doc alignment (`docs/tech/architecture.md`, `docs/tech/domain_model.md`).
+  - The Refactor/Review Agent owns: readability, naming, duplication, small behaviour-preserving refactors, and consistency of style/error-shape/navigation invocation. It explicitly does **not** rule on layering or BLoC boundaries — when it spots one, it forwards a one-line referral to you.
+  - Treat any incoming **`→ Architecture Guard:`** referral as a request to do the full §2 check on the cited symbol.
+  - When a problem could be framed either way, lead with the architecture rationale and explicitly note which mechanical refactoring step the Refactor/Review Agent can execute after your fix lands.
 
 ---
 
