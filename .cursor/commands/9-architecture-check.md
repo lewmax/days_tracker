@@ -13,7 +13,7 @@ Review the current diff/PR for alignment with:
 2. Check:
    - Layering & dependencies (imports, direct DAOs/API usage from UI, etc.).
    - Domain model integrity (entities, DTO separation, invariants).
-   - Orchestration & responsibilities (domain services, repository-level flows; **no** dedicated use-case layer).
+   - Orchestration & responsibilities (domain services, repository-level flows).
    - Repositories & data access (interfaces in domain, impls in data; presentation uses abstractions only).
    - BLoC boundaries and state management placement.
    - Date/time & persistence rules (UTC handling, etc.).
